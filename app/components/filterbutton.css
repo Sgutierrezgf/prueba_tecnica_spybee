@@ -1,0 +1,54 @@
+/* Filtro de modal con fondo oscuro */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Contenido del modal */
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 250px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Título del modal */
+.modal-content h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Estilos de los botones dentro del modal */
+.filter-options button {
+    background-color: #fac30f;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 100%;
+}
+
+.filter-options button:hover {
+    background-color: #e0a800;
+    transform: scale(1.05);
+}
+
+/* Hacer que el modal se cierre cuando el overlay es clickeado */
+.modal-overlay {
+    cursor: pointer;
+}

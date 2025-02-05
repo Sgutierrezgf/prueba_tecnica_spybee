@@ -1,0 +1,208 @@
+/* Estilo general */
+.project-container {
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    padding: 8px;
+    /* Reducido el padding para compactar las celdas */
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    position: relative;
+}
+
+/* Encabezados de tabla */
+th {
+    color: black;
+    font-weight: bold;
+}
+
+/* Fila de tabla */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Estilo de las celdas de plan y estado */
+span {
+    padding: 6px 10px;
+    /* Reducido el padding de los spans */
+    border-radius: 16px;
+    display: inline-block;
+    font-weight: bold;
+    color: white;
+    text-transform: capitalize;
+    transition: background-color 0.3s, transform 0.3s ease;
+}
+
+span:hover {
+    transform: scale(1.05);
+}
+
+/* Colores específicos para el plan */
+span[data-plan="big"] {
+    background-color: #fac30f;
+    /* Base amarillo */
+}
+
+span[data-plan="small"] {
+    background-color: #ffd54f;
+    /* Amarillo suave */
+}
+
+/* Colores específicos para el estado */
+span[data-status="active"] {
+    background-color: #8bc34a;
+    /* Verde activo */
+}
+
+span[data-status="inactive"] {
+    background-color: #e53935;
+    /* Rojo inactivo */
+}
+
+span[data-status="pending_payment"] {
+    background-color: #ff5722;
+    /* Naranja pendiente */
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background-color: #fac30f;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    /* Ajustado el padding del botón de paginación */
+    margin: 0 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.pagination button:hover {
+    background-color: #e0a800;
+    transform: scale(1.1);
+}
+
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-size: 16px;
+}
+
+/* Estilo de la celda de equipo (usuarios) */
+td[title] {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+td[title]:hover {
+    background-color: #f0f0f0;
+}
+
+table {
+    border-collapse: collapse;
+    /* Elimina la separación de celdas */
+    width: 100%;
+    /* Para que ocupe todo el ancho disponible */
+}
+
+th,
+td {
+    border: none;
+    /* Elimina los bordes de las celdas */
+    padding: 0;
+    /* Reduce aún más el padding */
+    text-align: left;
+    /* Alineación a la izquierda */
+}
+
+tr {
+    border-bottom: none;
+    /* Elimina las líneas entre filas */
+}
+
+.item-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    /* Reducido el padding entre los items */
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 10px;
+    /* Menos margen entre los items */
+}
+
+.item span {
+    font-size: 14px;
+    /* Reduje el tamaño del texto */
+    font-weight: bold;
+    color: #333;
+}
+
+.item p {
+    font-size: 12px;
+    /* Reduje el tamaño del texto para el nombre */
+    color: #777;
+}
+
+th.items-column {
+    text-align: center;
+    /* Centra el texto horizontalmente */
+}
+
+.project-info {
+    margin: 0;
+    /* Elimina márgenes por defecto */
+}
+
+.project-info strong {
+    font-weight: bold;
+    /* Aplica negrita al título del proyecto */
+}
+
+.last-visit {
+    font-size: 12px;
+    /* Ajusta el tamaño de la fuente para la fecha */
+    color: #777;
+    /* Cambia el color de la fecha si lo deseas */
+    margin: 0;
+    /* Elimina márgenes adicionales */
+}
