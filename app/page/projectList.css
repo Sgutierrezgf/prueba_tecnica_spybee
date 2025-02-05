@@ -49,7 +49,7 @@ span {
     border-radius: 16px;
     display: inline-block;
     font-weight: bold;
-    color: white;
+    color: black;
     text-transform: capitalize;
     transition: background-color 0.3s, transform 0.3s ease;
 }
