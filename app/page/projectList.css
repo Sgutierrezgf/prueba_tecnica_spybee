@@ -1,4 +1,4 @@
-/* Estilo general */
+
 .project-container {
     padding: 20px;
     font-family: 'Arial', sans-serif;
@@ -17,7 +17,7 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* Tabla */
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -27,20 +27,20 @@ table {
 th,
 td {
     padding: 8px;
-    /* Reducido el padding para compactar las celdas */
+   
     text-align: center;
     border: 1px solid #ddd;
     font-size: 14px;
     position: relative;
 }
 
-/* Encabezados de tabla */
+
 th {
     color: #4f5052;
     font-weight: bold;
 }
 
-/* Fila de tabla */
+
 tr:nth-child(even) {
     background-color: #f9f9f9;
 }
@@ -49,10 +49,9 @@ tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Estilo de las celdas de plan y estado */
+
 span {
     padding: 6px 10px;
-    /* Reducido el padding de los spans */
     border-radius: 16px;
     display: inline-block;
     font-weight: bold;
@@ -65,34 +64,34 @@ span:hover {
     transform: scale(1.05);
 }
 
-/* Colores específicos para el plan */
+
 span[data-plan="big"] {
     background-color: #eeb703;
-    /* Base amarillo */
+   
 }
 
 span[data-plan="small"] {
     background-color: #c35e00;
-    /* Amarillo suave */
+   
 }
 
-/* Colores específicos para el estado */
+
 span[data-status="active"] {
     background-color: #8bc34a;
-    /* Verde activo */
+   
 }
 
 span[data-status="inactive"] {
     background-color: #e53935;
-    /* Rojo inactivo */
+   
 }
 
 span[data-status="pending_payment"] {
     background-color: #ff5722;
-    /* Naranja pendiente */
+   
 }
 
-/* Pagination */
+
 .pagination {
     display: flex;
     justify-content: center;
@@ -105,7 +104,7 @@ span[data-status="pending_payment"] {
     color: #4f5052;
     border: none;
     padding: 8px 15px;
-    /* Ajustado el padding del botón de paginación */
+   
     margin: 0 8px;
     cursor: pointer;
     border-radius: 5px;
@@ -127,7 +126,7 @@ span[data-status="pending_payment"] {
     font-size: 16px;
 }
 
-/* Estilo de la celda de equipo (usuarios) */
+
 td[title] {
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -142,24 +141,24 @@ td[title]:hover {
 
 table {
     border-collapse: collapse;
-    /* Elimina la separación de celdas */
+   
     width: 100%;
-    /* Para que ocupe todo el ancho disponible */
+   
 }
 
 th,
 td {
     border: none;
-    /* Elimina los bordes de las celdas */
+   
     padding: 0;
-    /* Reduce aún más el padding */
+   
     text-align: left;
-    /* Alineación a la izquierda */
+   
 }
 
 tr {
     border-bottom: none;
-    /* Elimina las líneas entre filas */
+    
 }
 
 .item-container {
@@ -167,7 +166,7 @@ tr {
     flex-direction: row;
     justify-content: space-between;
     padding: 5px;
-    /* Reducido el padding entre los items */
+    
 }
 
 .item {
@@ -175,45 +174,43 @@ tr {
     flex-direction: column;
     align-items: center;
     margin-right: 10px;
-    /* Menos margen entre los items */
+  
 }
 
 .item span {
     font-size: 14px;
-    /* Reduje el tamaño del texto */
+   
     font-weight: bold;
     color: #4f5052;
 }
 
 .item p {
     font-size: 12px;
-    /* Reduje el tamaño del texto para el nombre */
+    
     color: #4f5052;
 }
 
 th.items-column {
     text-align: center;
-    /* Centra el texto horizontalmente */
+   
 }
 
 .project-info {
     margin: 0;
-    /* Elimina márgenes por defecto */
+    
 }
 
 .project-info strong {
     font-weight: bold;
     color: #4f5052;
-    /* Aplica negrita al título del proyecto */
+   
 }
 
 .last-visit {
     font-size: 12px;
-    /* Ajusta el tamaño de la fuente para la fecha */
     color: #777;
-    /* Cambia el color de la fecha si lo deseas */
     margin: 0;
-    /* Elimina márgenes adicionales */
+   
 }
 
 .filters{

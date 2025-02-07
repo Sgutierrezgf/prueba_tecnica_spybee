@@ -1,13 +1,14 @@
-import { countItemType } from "../utils/sortAndFilter"; // Importamos la función que necesitamos para contar los incidentes
+import { countItemType } from "../utils/sortAndFilter"; 
 
-// Importamos las interfaces desde el archivo de tipos
-import { Project } from "../types/projectTypes"; // Asegúrate de que la ruta sea correcta
+
+import { Project } from "../types/projectTypes"; 
 
 interface ProjectTableProps {
   projects: Project[];
+  onRowClick: (position: { lat: number; lng: number }) => void;
 }
 
-const ProjectTable: React.FC<ProjectTableProps> = ({ projects }) => {
+const ProjectTable: React.FC<ProjectTableProps> = ({ projects, onRowClick }) => {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, "0");
@@ -29,7 +30,14 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ projects }) => {
       </thead>
       <tbody>
         {projects.map((project) => (
-          <tr key={project._id}>
+          <tr
+            key={project._id}
+            onClick={() => {
+              if (project.position) {
+                onRowClick(project.position); // Pasa las coordenadas al hacer clic
+              }
+            }}
+          >
             <td className="project-info">
               <strong>{project.title}</strong>
               <p className="last-visit">{formatDate(project.lastVisit)}</p>

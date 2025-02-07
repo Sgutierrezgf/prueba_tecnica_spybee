@@ -1,6 +1,11 @@
 export interface User {
   name: string;
-  // lastName: string; // Si lo quieres opcional, lo puedes dejar aquí o agregarlo de nuevo si lo necesitas
+  // lastName: string;
+}
+export interface Position {
+  _id: string;
+  lat: number;
+  lng: number;
 }
 
 export interface Incident {
@@ -15,4 +20,5 @@ export interface Project {
   status: string;
   users: User[];
   incidents: Incident[];
+  position?:Position;
 }

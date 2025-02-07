@@ -1,5 +1,5 @@
 import React from "react";
-import "./filterbutton.css"; // Asegúrate de tener este archivo CSS
+import "./filterbutton.css"; 
 
 interface FilterModalProps {
   isOpen: boolean;

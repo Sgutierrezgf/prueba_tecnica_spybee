@@ -1,6 +1,5 @@
 .search-container {
     margin-bottom: 20px;
-    /* Espacio debajo del campo de búsqueda */
     display: flex;
     justify-content: space-between
 }
@@ -9,7 +8,6 @@
     padding: 8px 12px;
     font-size: 14px;
     width: 200px;
-    /* Ancho del campo de búsqueda */
     border: 1px solid #ddd;
     border-radius: 5px;
     outline: none;
@@ -17,5 +15,5 @@
 
 .search-input:focus {
     border-color: #fac30f;
-    /* Color de borde cuando el input está enfocado */
+
 }
