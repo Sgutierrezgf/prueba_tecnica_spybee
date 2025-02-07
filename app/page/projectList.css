@@ -3,9 +3,16 @@
     padding: 20px;
     font-family: 'Arial', sans-serif;
 }
+header{
+    background-color: #e7e7e7;
+}
+.image-header{
+    width: 100px;
+    padding: 10px 0 10px 25px;
+}
 
 h2 {
-    color: #333;
+    color: #4f5052;
     font-size: 24px;
     margin-bottom: 20px;
 }
@@ -29,7 +36,7 @@ td {
 
 /* Encabezados de tabla */
 th {
-    color: black;
+    color: #4f5052;
     font-weight: bold;
 }
 
@@ -49,7 +56,7 @@ span {
     border-radius: 16px;
     display: inline-block;
     font-weight: bold;
-    color: black;
+    color: #4f5052;
     text-transform: capitalize;
     transition: background-color 0.3s, transform 0.3s ease;
 }
@@ -60,12 +67,12 @@ span:hover {
 
 /* Colores específicos para el plan */
 span[data-plan="big"] {
-    background-color: #fac30f;
+    background-color: #eeb703;
     /* Base amarillo */
 }
 
 span[data-plan="small"] {
-    background-color: #ffd54f;
+    background-color: #c35e00;
     /* Amarillo suave */
 }
 
@@ -95,7 +102,7 @@ span[data-status="pending_payment"] {
 
 .pagination button {
     background-color: #fac30f;
-    color: white;
+    color: #4f5052;
     border: none;
     padding: 8px 15px;
     /* Ajustado el padding del botón de paginación */
@@ -126,6 +133,7 @@ td[title] {
     white-space: nowrap;
     overflow: hidden;
     cursor: pointer;
+    color: #4f5052;
 }
 
 td[title]:hover {
@@ -174,13 +182,13 @@ tr {
     font-size: 14px;
     /* Reduje el tamaño del texto */
     font-weight: bold;
-    color: #333;
+    color: #4f5052;
 }
 
 .item p {
     font-size: 12px;
     /* Reduje el tamaño del texto para el nombre */
-    color: #777;
+    color: #4f5052;
 }
 
 th.items-column {
@@ -195,6 +203,7 @@ th.items-column {
 
 .project-info strong {
     font-weight: bold;
+    color: #4f5052;
     /* Aplica negrita al título del proyecto */
 }
 
@@ -205,4 +214,13 @@ th.items-column {
     /* Cambia el color de la fecha si lo deseas */
     margin: 0;
     /* Elimina márgenes adicionales */
+}
+
+.filters{
+    display: flex;
+}
+
+.filter-button{
+    width: 30px;
+    height: 30px;
 }

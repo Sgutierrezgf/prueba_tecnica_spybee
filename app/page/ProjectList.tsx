@@ -7,6 +7,7 @@ import { filterAndSortProjects } from "../utils/sortAndFilter";
 import Pagination from "../components/Pagination";
 import ProjectTable from "../components/ProjectTable";
 import { Project } from "../types/projectTypes";
+import { FaFilter } from "react-icons/fa";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -63,35 +64,45 @@ const ProjectList = () => {
   }, []);
 
   return (
-    <div className="project-container">
-      <h2>Mis proyectos</h2>
-      <div className="search-container">
-        <button className="filter-button" onClick={() => setIsModalOpen(true)}>
-          filter
-        </button>
-        <SearchInput
-          searchTerm={searchTerm}
-          onSearchChange={handleSearchChange}
-        />
-      </div>
-
-      <FilterModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSortByTitle={handleSortByTitle}
-        onSortByIncidents={handleSortByIncidents}
-        onSortByRFI={handleSortByRFI}
-        onSortByTasks={handleSortByTasks}
-      />
-
-      <ProjectTable projects={filteredProjects} />
-
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
+  <>  
+  <header>
+    <img className="image-header" src="/spybee_logo_black.png" alt="spybee logo" />
+  </header>
+  <div className="project-container">
+    
+    <div className="search-container">
+    <h2>Mis proyectos</h2>
+    <div className="filters">
+    <button className="filter-button" onClick={() => setIsModalOpen(true)}>
+    <FaFilter />
+      </button>
+      <SearchInput
+        searchTerm={searchTerm}
+        onSearchChange={handleSearchChange}
       />
     </div>
+
+    </div>
+
+    <FilterModal
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+      onSortByTitle={handleSortByTitle}
+      onSortByIncidents={handleSortByIncidents}
+      onSortByRFI={handleSortByRFI}
+      onSortByTasks={handleSortByTasks}
+    />
+
+    <ProjectTable projects={filteredProjects} />
+
+    <Pagination
+      currentPage={currentPage}
+      totalPages={totalPages}
+      onPageChange={setCurrentPage}
+    />
+  </div>
+  </>
+  
   );
 };
 
