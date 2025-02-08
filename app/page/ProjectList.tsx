@@ -40,13 +40,13 @@ const ProjectList = () => {
     setSearchTerm(e.target.value);
   };
 
-  
+
   const handleRowClick = (position: { lat: number; lng: number }) => {
     if (position && position.lat && position.lng) {
       setViewState({
         latitude: position.lat,
         longitude: position.lng,
-        zoom: 12, 
+        zoom: 12,
       });
     }
   };
@@ -72,22 +72,23 @@ const ProjectList = () => {
   }, []);
 
   const validProjects = projects.filter((project) => project.position && project.position.lat && project.position.lng);
-  
+
   return (
     <>
       <header>
         <img className="image-header" src="/spybee_logo_black.png" alt="spybee logo" />
       </header>
-      <div className="project-container">
-        <div className="search-container">
+
+      <main className="project-container">
+        <section className="search-container">
           <h2>Mis proyectos</h2>
           <div className="filters">
-            <button className="filter-button" onClick={() => setIsModalOpen(true)}>
+            <button className="filter-button" onClick={() => setIsModalOpen(true)} aria-label="Filtrar proyectos">
               <FaFilter />
             </button>
             <SearchInput searchTerm={searchTerm} onSearchChange={handleSearchChange} />
           </div>
-        </div>
+        </section>
 
         <FilterModal
           isOpen={isModalOpen}
@@ -98,13 +99,16 @@ const ProjectList = () => {
           onSortByTasks={handleSortByTasks}
         />
 
-      
-        <Map viewState={viewState} setViewState={setViewState} projects={validProjects} />
+        <section className="map-container">
+          <Map viewState={viewState} setViewState={setViewState} projects={validProjects} />
+        </section>
 
-        <ProjectTable projects={filteredProjects} onRowClick={handleRowClick} />
+        <section className="project-table-container">
+          <ProjectTable projects={filteredProjects} onRowClick={handleRowClick} />
+        </section>
 
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-      </div>
+      </main>
     </>
   );
 };
