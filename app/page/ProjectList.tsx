@@ -8,6 +8,8 @@ import Pagination from "../components/Pagination";
 import ProjectTable from "../components/ProjectTable";
 import { Project } from "../types/projectTypes";
 import { FaFilter } from "react-icons/fa";
+import { FiMapPin } from "react-icons/fi";
+import { FaListUl } from "react-icons/fa";
 import Map from "../components/Map";
 
 const ITEMS_PER_PAGE = 10;
@@ -23,6 +25,8 @@ const ProjectList = () => {
     longitude: -100,
     zoom: 3.5,
   });
+  const [isMapVisible, setIsMapVisible] = useState(false);
+  const [activeButton, setActiveButton] = useState<"map" | "list" | "filter" | null>(null);
 
   useEffect(() => {
     fetch("/data/mock_data.json")
@@ -39,7 +43,6 @@ const ProjectList = () => {
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
-
 
   const handleRowClick = (position: { lat: number; lng: number }) => {
     if (position && position.lat && position.lng) {
@@ -73,6 +76,39 @@ const ProjectList = () => {
 
   const validProjects = projects.filter((project) => project.position && project.position.lat && project.position.lng);
 
+
+
+  const toggleMapVisibility = () => {
+
+    if (activeButton === "map") {
+      setActiveButton(null);
+      setIsMapVisible(false);
+    } else {
+      setActiveButton("map");
+      setIsMapVisible(true);
+    }
+  };
+
+  const handleListClick = () => {
+
+    if (isMapVisible) {
+      setIsMapVisible(false);
+    }
+
+    setActiveButton(activeButton === "list" ? null : "list");
+  };
+
+
+  const handleFilterClick = () => {
+    
+    if (activeButton === "filter") {
+      setActiveButton(null); 
+    } else {
+      setActiveButton("filter"); 
+    }
+    setIsModalOpen(true); 
+  };
+
   return (
     <>
       <header>
@@ -83,8 +119,27 @@ const ProjectList = () => {
         <section className="search-container">
           <h2>Mis proyectos</h2>
           <div className="filters">
-            <button className="filter-button" onClick={() => setIsModalOpen(true)} aria-label="Filtrar proyectos">
+            <button
+              className={`filter-button ${activeButton === "filter" ? "active" : ""}`}
+              onClick={handleFilterClick}
+              aria-label="Filtrar proyectos"
+
+            >
               <FaFilter />
+            </button>
+            <button
+              className={`filter-button ${activeButton === "map" ? "active" : ""}`}
+              onClick={toggleMapVisibility}
+              aria-label="Mostrar mapa de proyectos"
+            >
+              <FiMapPin />
+            </button>
+            <button
+              className={`filter-button ${activeButton === "list" ? "active" : ""}`}
+              onClick={handleListClick}
+              aria-label="Listar proyectos - esconder mapa"
+            >
+              <FaListUl />
             </button>
             <SearchInput searchTerm={searchTerm} onSearchChange={handleSearchChange} />
           </div>
@@ -92,16 +147,19 @@ const ProjectList = () => {
 
         <FilterModal
           isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
+          onClose={() => {
+            setIsModalOpen(false);  
+            setActiveButton(null); 
+          }}
           onSortByTitle={handleSortByTitle}
           onSortByIncidents={handleSortByIncidents}
           onSortByRFI={handleSortByRFI}
           onSortByTasks={handleSortByTasks}
         />
 
-        <section className="map-container">
+        {isMapVisible && <section className="map-container">
           <Map viewState={viewState} setViewState={setViewState} projects={validProjects} />
-        </section>
+        </section>}
 
         <section className="project-table-container">
           <ProjectTable projects={filteredProjects} onRowClick={handleRowClick} />

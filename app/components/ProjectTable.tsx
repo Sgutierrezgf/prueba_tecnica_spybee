@@ -1,12 +1,15 @@
+import React, { useState } from "react";
 import { countItemType } from "../utils/sortAndFilter"; 
 import { Project } from "../types/projectTypes"; 
 
 interface ProjectTableProps {
   projects: Project[];
-  onRowClick: (position: { lat: number; lng: number }) => void;
+  onRowClick: (position: { lat: number; lng: number }, projectTitle: string) => void;
 }
 
 const ProjectTable: React.FC<ProjectTableProps> = ({ projects, onRowClick }) => {
+  const [selectedRow, setSelectedRow] = useState<string | null>(null);
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, "0");
@@ -31,9 +34,13 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ projects, onRowClick }) => 
           <tr
             key={project._id}
             onClick={() => {
+              setSelectedRow(project._id); // Marca la fila como seleccionada
               if (project.position) {
-                onRowClick(project.position); 
+                onRowClick(project.position, project.title);
               }
+            }}
+            style={{
+              borderLeft: selectedRow === project._id ? "5px solid #fac30f" : "none", // Resalta la fila seleccionada
             }}
           >
             <td className="project-info">
@@ -49,16 +56,9 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ projects, onRowClick }) => 
               <span data-status={project.status}>{project.status}</span>
             </td>
             <td
-              title={
-                project.users.length > 3
-                  ? project.users.map((user) => user.name).join(", ")
-                  : ""
-              }
+              title={project.users.length > 3 ? project.users.map((user) => user.name).join(", ") : ""}
             >
-              {project.users
-                .slice(0, 3)
-                .map((user) => user.name)
-                .join(", ") + (project.users.length > 3 ? "..." : "")}
+              {project.users.slice(0, 3).map((user) => user.name).join(", ") + (project.users.length > 3 ? "..." : "")}
             </td>
             <td>
               <div className="item-container">

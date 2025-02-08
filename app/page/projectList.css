@@ -4,6 +4,7 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    background-color: #f6f7f8;
   }
   .project-table-container {
     width: 100%;
@@ -33,11 +34,14 @@
     margin-top: 20px;
   }
   
+  tbody{
+    background-color: #fcfcfd;
+  }
 
   th, td {
     padding: 8px;
     text-align: center;
-    border: 1px solid #ddd;
+    border: none;
   }
 
   th {
@@ -46,12 +50,7 @@
   }
 
 
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  tr:hover {
-    background-color: #f1f1f1;
-  }
+
 
 span {
     padding: 6px 10px;
@@ -70,27 +69,32 @@ span:hover {
 
 span[data-plan="big"] {
     background-color: #eeb703;
+    color: #d0d0d0;
    
 }
 
 span[data-plan="small"] {
     background-color: #c35e00;
+    color: #d0d0d0;
    
 }
 
 
 span[data-status="active"] {
-    background-color: #8bc34a;
+    background-color: #60fd68;
+    color: green;
    
 }
 
 span[data-status="inactive"] {
-    background-color: #e53935;
+    background-color: #fa615e;
+    color: red;
    
 }
 
 span[data-status="pending_payment"] {
-    background-color: #ff5722;
+    background-color: #fdfa53;
+    color: #F92;
    
 }
 
@@ -147,19 +151,14 @@ table {
    
 }
 
-th,
-td {
-    border: none;
-   
-    padding: 0;
-   
-    text-align: left;
-   
-}
+
 
 tr {
     border-bottom: none;
-    
+}
+tbody tr:hover {
+  background-color: #a3a4a5;
+  cursor: pointer;
 }
 
 .item-container {
@@ -211,22 +210,36 @@ th.items-column {
 
 .filters {
     display: flex;
-    gap: 10px;
+    gap: 5px;
     align-items: center;
   }
   
-  .filter-button {
-    width: 30px;
-    height: 30px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
-.project-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+ 
+.filter-button {
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;  
+}
+
+
+.filter-button.active {
+  background-color: #fac30f;
+  border-color: #fac30f;
+  color: white; 
+}
+
+
+.filter-button:hover:not(.active) {
+  background-color: #f0f0f0;
+}
+
+
+.filter-button.active:hover {
+  background-color: #fac30f; 
+  border-color: #fac30f; 
+}
   
   .map-container {
     width: 100%;
@@ -299,25 +312,17 @@ th.items-column {
     padding: 8px 12px;
     font-size: 14px;
     width: 200px;
-    border: 1px solid #ddd;
+    border: 1px solid #fac30f;
     border-radius: 5px;
+   
   }
 
-.search-input:focus {
-    border-color: #fac30f;
-
-}
 @media (max-width: 768px) {
     .search-container {
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
     }
-  
-    .search-input {
-      width: 100%;
-      margin-top: 10px;
-    }
-  
+
     .filters {
       width: 100%;
       justify-content: flex-start;
@@ -325,7 +330,7 @@ th.items-column {
   
     .item-container {
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
     }
   
     .map-container {
