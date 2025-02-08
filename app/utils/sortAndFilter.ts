@@ -26,24 +26,24 @@ export const filterAndSortProjects = (
     )
     .sort((a, b) => {
       if (sortCriteria === "title") {
-        return a.title.localeCompare(b.title); // Ordenar alfabéticamente por título
+        return a.title.localeCompare(b.title); 
       }
       if (sortCriteria === "incidents") {
         return (
           countItemType(b.incidents, "incidents") -
           countItemType(a.incidents, "incidents")
-        ); // Ordenar por cantidad de incidencias
+        ); 
       }
       if (sortCriteria === "RFI") {
         return (
           countItemType(b.incidents, "RFI") - countItemType(a.incidents, "RFI")
-        ); // Ordenar por RFI
+        ); 
       }
       if (sortCriteria === "tasks") {
         return (
           countItemType(b.incidents, "task") -
           countItemType(a.incidents, "task")
-        ); // Ordenar por tareas
+        ); 
       }
       return 0;
     })

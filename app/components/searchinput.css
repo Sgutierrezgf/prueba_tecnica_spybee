@@ -1,8 +1,15 @@
 .search-container {
-    margin-bottom: 20px;
     display: flex;
-    justify-content: space-between
-}
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+  }
+
+  .search-container h2 {
+    flex-grow: 1; 
+  }
 
 .search-input {
     padding: 8px 12px;

@@ -1,6 +1,4 @@
 import { countItemType } from "../utils/sortAndFilter"; 
-
-
 import { Project } from "../types/projectTypes"; 
 
 interface ProjectTableProps {
@@ -34,7 +32,7 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ projects, onRowClick }) => 
             key={project._id}
             onClick={() => {
               if (project.position) {
-                onRowClick(project.position); // Pasa las coordenadas al hacer clic
+                onRowClick(project.position); 
               }
             }}
           >

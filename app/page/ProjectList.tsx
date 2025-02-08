@@ -8,8 +8,7 @@ import Pagination from "../components/Pagination";
 import ProjectTable from "../components/ProjectTable";
 import { Project } from "../types/projectTypes";
 import { FaFilter } from "react-icons/fa";
-import { Map, Marker } from "react-map-gl/mapbox";
-import "mapbox-gl/dist/mapbox-gl.css";
+import Map from "../components/Map";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -41,13 +40,13 @@ const ProjectList = () => {
     setSearchTerm(e.target.value);
   };
 
-  // Cambiar la vista del mapa cuando se haga clic en una fila
+  
   const handleRowClick = (position: { lat: number; lng: number }) => {
     if (position && position.lat && position.lng) {
       setViewState({
         latitude: position.lat,
         longitude: position.lng,
-        zoom: 12, // Ajusta el zoom según lo necesites
+        zoom: 12, 
       });
     }
   };
@@ -72,6 +71,8 @@ const ProjectList = () => {
     setIsModalOpen(false);
   }, []);
 
+  const validProjects = projects.filter((project) => project.position && project.position.lat && project.position.lng);
+  
   return (
     <>
       <header>
@@ -97,26 +98,8 @@ const ProjectList = () => {
           onSortByTasks={handleSortByTasks}
         />
 
-        <div>
-          <Map
-            mapboxAccessToken="pk.eyJ1Ijoic2d1dGllcnJlemdmIiwiYSI6ImNtNnV5c2l2eDAybzkycXB5emNvNnJzanoifQ.VGsbYrOQLPyqLU5adbraPQ"
-            {...viewState} // Pasar directamente el estado actual del mapa
-            onMove={(e) => setViewState(e.viewState)} // Actualizar el estado cuando el mapa se mueva
-            style={{ width: 600, height: 400 }}
-            mapStyle="mapbox://styles/mapbox/streets-v9"
-          >
-            {projects.map((project) => {
-              const position = project.position;
-              return (
-                position && position.lat && position.lng && (
-                  <Marker key={project._id} latitude={position.lat} longitude={position.lng}>
-                    <div style={{ color: "red" }}>📍</div>
-                  </Marker>
-                )
-              );
-            })}
-          </Map>
-        </div>
+      
+        <Map viewState={viewState} setViewState={setViewState} projects={validProjects} />
 
         <ProjectTable projects={filteredProjects} onRowClick={handleRowClick} />
 
