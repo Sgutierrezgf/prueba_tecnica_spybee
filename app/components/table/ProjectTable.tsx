@@ -35,13 +35,13 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ projects, onRowClick }) => 
           <tr
             key={project._id}
             onClick={() => {
-              setSelectedRow(project._id); // Marca la fila como seleccionada
+              setSelectedRow(project._id); 
               if (project.position) {
                 onRowClick(project.position, project.title);
               }
             }}
             style={{
-              borderLeft: selectedRow === project._id ? "5px solid #fac30f" : "none", // Resalta la fila seleccionada
+              borderLeft: selectedRow === project._id ? "5px solid #fac30f" : "none", 
             }}
           >
             <td className="project-info">

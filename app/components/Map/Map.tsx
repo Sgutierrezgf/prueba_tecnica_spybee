@@ -20,7 +20,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ viewState, setViewState, pr
   return (
     <div className="map-container">
       <Map
-        mapboxAccessToken="your-mapbox-access-token"
+        mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
         {...viewState}
         onMove={(e) => setViewState(e.viewState)}
         style={{ width: "100%", height: "100%", borderRadius: "15px 15px 0 0" }}
