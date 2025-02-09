@@ -15,14 +15,11 @@ import Image from "next/image";
 const ProjectList = () => {
   const {
     projects,
-    setProjects,
     currentPage,
     setCurrentPage,
     searchTerm,
     setSearchTerm,
-    sortCriteria,
     setSortCriteria,
-    viewState,
     setViewState,
     isMapVisible,
     toggleMapVisibility,
