@@ -1,30 +1,23 @@
-import React, { useState } from "react";
+import { useProjectStore } from "../../store/store"; 
 import { Map, Marker, Popup } from "react-map-gl/mapbox";
 import { Project } from "../../types/projectTypes";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./map.css";
+import { useState } from "react";
 
-interface ViewState {
-  latitude: number;
-  longitude: number;
-  zoom: number;
-}
-
-interface MapComponentProps {
-  viewState: ViewState;
-  setViewState: React.Dispatch<React.SetStateAction<ViewState>>;
-  projects: Project[];
-}
-
-const MapComponent: React.FC<MapComponentProps> = ({ viewState, setViewState, projects }) => {
+const MapComponent: React.FC<{ projects: Project[] }> = ({ projects }) => {
+  
+  const { viewState, setViewState } = useProjectStore();
+  
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
     <div className="map-container">
       <Map
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
-        {...viewState}
-        onMove={(e) => setViewState(e.viewState as ViewState)} // 🔹 Asegurar el tipo
+
+        {...viewState}  
+        onMove={(e) => setViewState(e.viewState)}
         style={{ width: "100%", height: "100%", borderRadius: "15px 15px 0 0" }}
         mapStyle="mapbox://styles/mapbox/streets-v9"
       >

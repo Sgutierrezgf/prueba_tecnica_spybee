@@ -1,45 +1,43 @@
 "use client";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect } from "react";
+import { loadProjects, useProjectStore } from "../store/store";
 import "./projectList.css";
 import SearchInput from "../components/filters-search/SearchInput";
 import FilterModal from "../components/filters-search/FilterButton";
-import { filterAndSortProjects } from "../utils/sortAndFilter";
 import Pagination from "../components/pagination/Pagination";
 import ProjectTable from "../components/table/ProjectTable";
 import Map from "../components/Map/Map";
-import { Project } from "../types/projectTypes";
 import { FaFilter } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
 import { FaListUl } from "react-icons/fa";
-import Image from 'next/image'
-
-const ITEMS_PER_PAGE = 10;
+import Image from "next/image";
 
 const ProjectList = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [sortCriteria, setSortCriteria] = useState<"title" | "incidents" | "RFI" | "tasks">("title");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [viewState, setViewState] = useState({
-    latitude: 40,
-    longitude: -100,
-    zoom: 3.5,
-  });
-  const [isMapVisible, setIsMapVisible] = useState(false);
-  const [activeButton, setActiveButton] = useState<"map" | "list" | "filter" | null>(null);
+  const {
+    projects,
+    setProjects,
+    currentPage,
+    setCurrentPage,
+    searchTerm,
+    setSearchTerm,
+    sortCriteria,
+    setSortCriteria,
+    viewState,
+    setViewState,
+    isMapVisible,
+    toggleMapVisibility,
+    activeButton,
+    setActiveButton,
+    filteredProjects, 
+  } = useProjectStore();
 
   useEffect(() => {
-    fetch("/data/mock_data.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setProjects(data);
-      })
-      .catch((error) => console.error("Error al cargar JSON:", error));
+    loadProjects(); 
   }, []);
 
-  const filteredProjects = filterAndSortProjects(projects, searchTerm, sortCriteria, currentPage, ITEMS_PER_PAGE);
-  const totalPages = Math.ceil(projects.length / ITEMS_PER_PAGE);
+  const projectsToDisplay = filteredProjects(); 
+
+  const totalPages = Math.ceil(projects.length / 10);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -55,65 +53,30 @@ const ProjectList = () => {
     }
   };
 
-  const handleSortByTitle = useCallback(() => {
-    setSortCriteria("title");
-    setIsModalOpen(false);
-  }, []);
-
-  const handleSortByIncidents = useCallback(() => {
-    setSortCriteria("incidents");
-    setIsModalOpen(false);
-  }, []);
-
-  const handleSortByRFI = useCallback(() => {
-    setSortCriteria("RFI");
-    setIsModalOpen(false);
-  }, []);
-
-  const handleSortByTasks = useCallback(() => {
-    setSortCriteria("tasks");
-    setIsModalOpen(false);
-  }, []);
-
-  const validProjects = projects.filter((project) => project.position && project.position.lat && project.position.lng);
-
-
-
-  const toggleMapVisibility = () => {
-
-    if (activeButton === "map") {
-      setActiveButton(null);
-      setIsMapVisible(false);
-    } else {
-      setActiveButton("map");
-      setIsMapVisible(true);
-    }
+  const handleSort = (criteria: "title" | "incidents" | "RFI" | "tasks") => {
+    setSortCriteria(criteria);
   };
-
-  const handleListClick = () => {
-
-    if (isMapVisible) {
-      setIsMapVisible(false);
-    }
-
-    setActiveButton(activeButton === "list" ? null : "list");
-  };
-
 
   const handleFilterClick = () => {
-    
-    if (activeButton === "filter") {
-      setActiveButton(null); 
-    } else {
-      setActiveButton("filter"); 
+    setActiveButton(activeButton === "filter" ? null : "filter");
+  };
+
+  const handleMapButtonClick = () => {
+    toggleMapVisibility();
+    setActiveButton(isMapVisible ? null : "map");
+  };
+
+  const handleListButtonClick = () => {
+    if (isMapVisible) {
+      toggleMapVisibility();
     }
-    setIsModalOpen(true); 
+    setActiveButton(activeButton === "list" ? null : "list");
   };
 
   return (
     <>
       <header>
-        <Image className="image-header" src="/spybee_logo_black.png" alt="spybee logo" />
+        <Image loading="lazy" className="image-header" src="/spybee_logo_black.png" alt="spybee logo" width={100} height={50} />
       </header>
 
       <main className="project-container">
@@ -124,20 +87,19 @@ const ProjectList = () => {
               className={`filter-button ${activeButton === "filter" ? "active" : ""}`}
               onClick={handleFilterClick}
               aria-label="Filtrar proyectos"
-
             >
               <FaFilter />
             </button>
             <button
-              className={`filter-button ${activeButton === "map" ? "active" : ""}`}
-              onClick={toggleMapVisibility}
+              className={`filter-button ${isMapVisible ? "active" : ""}`}
+              onClick={handleMapButtonClick}
               aria-label="Mostrar mapa de proyectos"
             >
               <FiMapPin />
             </button>
             <button
               className={`filter-button ${activeButton === "list" ? "active" : ""}`}
-              onClick={handleListClick}
+              onClick={handleListButtonClick}
               aria-label="Listar proyectos - esconder mapa"
             >
               <FaListUl />
@@ -147,23 +109,19 @@ const ProjectList = () => {
         </section>
 
         <FilterModal
-          isOpen={isModalOpen}
-          onClose={() => {
-            setIsModalOpen(false);  
-            setActiveButton(null); 
-          }}
-          onSortByTitle={handleSortByTitle}
-          onSortByIncidents={handleSortByIncidents}
-          onSortByRFI={handleSortByRFI}
-          onSortByTasks={handleSortByTasks}
+          isOpen={activeButton === "filter"}
+          onClose={() => setActiveButton(null)}
+          onSort={handleSort}
         />
 
-        {isMapVisible && <section className="map-container">
-          <Map viewState={viewState} setViewState={setViewState} projects={validProjects} />
-        </section>}
+        {isMapVisible && (
+          <section className="map-container">
+            <Map projects={projectsToDisplay} />
+          </section>
+        )}
 
         <section className="project-table-container">
-          <ProjectTable projects={filteredProjects} onRowClick={handleRowClick} />
+          <ProjectTable projects={projectsToDisplay} onRowClick={handleRowClick} />
         </section>
 
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
