@@ -1,16 +1,18 @@
-import React, {useState} from "react";
-import { Map, Marker, Popup  } from "react-map-gl/mapbox";
+import React, { useState } from "react";
+import { Map, Marker, Popup } from "react-map-gl/mapbox";
 import { Project } from "../../types/projectTypes";
 import "mapbox-gl/dist/mapbox-gl.css";
-import './map.css'
+import "./map.css";
+
+interface ViewState {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+}
 
 interface MapComponentProps {
-  viewState: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-  };
-  setViewState: React.Dispatch<React.SetStateAction<any>>;
+  viewState: ViewState;
+  setViewState: React.Dispatch<React.SetStateAction<ViewState>>;
   projects: Project[];
 }
 
@@ -22,7 +24,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ viewState, setViewState, pr
       <Map
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
         {...viewState}
-        onMove={(e) => setViewState(e.viewState)}
+        onMove={(e) => setViewState(e.viewState as ViewState)} // 🔹 Asegurar el tipo
         style={{ width: "100%", height: "100%", borderRadius: "15px 15px 0 0" }}
         mapStyle="mapbox://styles/mapbox/streets-v9"
       >
@@ -41,11 +43,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ viewState, setViewState, pr
                 </Marker>
 
                 {selectedProject && selectedProject._id === project._id && (
-                  <Popup
-                    latitude={lat}
-                    longitude={lng}
-                    onClose={() => setSelectedProject(null)}
-                  >
+                  <Popup latitude={lat} longitude={lng} onClose={() => setSelectedProject(null)}>
                     <div>{project.title}</div>
                   </Popup>
                 )}

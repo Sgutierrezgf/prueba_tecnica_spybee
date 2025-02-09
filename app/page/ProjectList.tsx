@@ -11,6 +11,7 @@ import { Project } from "../types/projectTypes";
 import { FaFilter } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
 import { FaListUl } from "react-icons/fa";
+import Image from 'next/image'
 
 const ITEMS_PER_PAGE = 10;
 
@@ -112,7 +113,7 @@ const ProjectList = () => {
   return (
     <>
       <header>
-        <img className="image-header" src="/spybee_logo_black.png" alt="spybee logo" />
+        <Image className="image-header" src="/spybee_logo_black.png" alt="spybee logo" />
       </header>
 
       <main className="project-container">
