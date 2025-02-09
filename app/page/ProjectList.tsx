@@ -1,16 +1,16 @@
 "use client";
 import { useEffect, useState, useCallback } from "react";
 import "./projectList.css";
-import SearchInput from "../components/SearchInput";
-import FilterModal from "../components/FilterButton";
+import SearchInput from "../components/filters-search/SearchInput";
+import FilterModal from "../components/filters-search/FilterButton";
 import { filterAndSortProjects } from "../utils/sortAndFilter";
-import Pagination from "../components/Pagination";
-import ProjectTable from "../components/ProjectTable";
+import Pagination from "../components/pagination/Pagination";
+import ProjectTable from "../components/table/ProjectTable";
+import Map from "../components/Map/Map";
 import { Project } from "../types/projectTypes";
 import { FaFilter } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
 import { FaListUl } from "react-icons/fa";
-import Map from "../components/Map";
 
 const ITEMS_PER_PAGE = 10;
 

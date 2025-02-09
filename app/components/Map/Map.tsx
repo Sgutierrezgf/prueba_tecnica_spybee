@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import { Map, Marker, Popup  } from "react-map-gl/mapbox";
-import { Project } from "../types/projectTypes";
+import { Project } from "../../types/projectTypes";
 import "mapbox-gl/dist/mapbox-gl.css";
+import './map.css'
 
 interface MapComponentProps {
   viewState: {

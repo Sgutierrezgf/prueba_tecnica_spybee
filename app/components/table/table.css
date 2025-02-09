@@ -1,0 +1,146 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  tbody{
+    background-color: #fcfcfd;
+  }
+
+  th, td {
+    padding: 8px;
+    text-align: center;
+    border: none;
+  }
+
+  th {
+    color: #4f5052;
+    font-weight: bold;
+  }
+
+
+
+
+span {
+    padding: 6px 10px;
+    border-radius: 16px;
+    display: inline-block;
+    font-weight: bold;
+    color: #4f5052;
+    text-transform: capitalize;
+    transition: background-color 0.3s, transform 0.3s ease;
+}
+
+span:hover {
+    transform: scale(1.05);
+}
+
+
+span[data-plan="big"] {
+    background-color: #eeb703;
+    color: #d0d0d0;
+   
+}
+
+span[data-plan="small"] {
+    background-color: #c35e00;
+    color: #d0d0d0;
+   
+}
+
+
+span[data-status="active"] {
+    background-color: #60fd68;
+    color: green;
+   
+}
+
+span[data-status="inactive"] {
+    background-color: #fa615e;
+    color: red;
+   
+}
+
+span[data-status="pending_payment"] {
+    background-color: #fdfa53;
+    color: #F92;
+   
+}
+
+
+
+
+td[title] {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+    color: #4f5052;
+}
+
+td[title]:hover {
+    background-color: #f0f0f0;
+}
+
+table {
+    border-collapse: collapse;
+   
+    width: 100%;
+   
+}
+
+tr {
+    border-bottom: none;
+}
+tbody tr:hover {
+  background-color: #a3a4a5;
+  cursor: pointer;
+}
+
+.item-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 5px;
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 10px;
+  }
+
+  .item span {
+    font-size: 14px;
+    font-weight: bold;
+    color: #4f5052;
+  }
+  
+  .item p {
+    font-size: 12px;
+    color: #4f5052;
+  }
+th.items-column {
+    text-align: center;
+   
+}
+
+.project-info {
+    margin: 0;
+    
+}
+
+.project-info strong {
+    font-weight: bold;
+    color: #4f5052;
+   
+}
+
+.last-visit {
+    font-size: 12px;
+    color: #777;
+    margin: 0;
+   
+}

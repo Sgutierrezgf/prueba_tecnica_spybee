@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { countItemType } from "../utils/sortAndFilter"; 
-import { Project } from "../types/projectTypes"; 
+import { countItemType } from "../../utils/sortAndFilter"; 
+import { Project } from "../../types/projectTypes"; 
+import './table.css'
 
 interface ProjectTableProps {
   projects: Project[];
